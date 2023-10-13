@@ -1,29 +1,39 @@
 import React from 'react';
+import { ContentData, PhotoContentData, TextContentData } from '../../data/ContentData';
+
+import './Content.css';
 
 interface ContentProps {
   contentData: ContentData
 }
 
 export const Content = ({ contentData }: ContentProps) => {
-  return contentData instanceof TextContent ? <TextContent textContentData={(contentData as TextContent)}/> : <PhotoContent photoContentData={(contentData as PhotoContent)}/>;
+  console.log("is TextContentData? ",contentData instanceof TextContentData)
+  return <div>
+    {
+      contentData instanceof TextContentData? 
+      <TextContent textContentData={(contentData as TextContentData).content}/> : 
+      <PhotoContent photoContentData={(contentData as PhotoContentData).photos}/>
+    }
+  </div>
 }
 
 interface TextContentProps {
-  textContentData: TextContent
+  textContentData: string
 }
 
 const TextContent = ({textContentData}:TextContentProps) => {
-  return <div>
-      <p>{textContentData.content}</p>
+  return <div className='post-content'>
+      <p className='post-text'>{textContentData}</p>
   </div>;
 }
 
 interface PhotoContentProps {
-  photoContentData: PhotoContent
+  photoContentData: string[]
 }
 
 const PhotoContent = ({photoContentData}:PhotoContentProps) => {
-  return <div>
-      <img src={photoContentData.photos[0]} className="post-image" />
+  return <div className='post-content'>
+      <img src={photoContentData[0]} className="post-image" />
   </div>;
 }

@@ -1,21 +1,15 @@
-class TextContent {
-
+export class TextContentData {
     content:string
-
     constructor(content:string){
         this.content = content
     }
-
 }
 
-class PhotoContent {
-
+export class PhotoContentData {
     photos:string[]
-
     constructor(photos:string[]){
         this.photos = photos
     }
-
 }
 
-type ContentData = TextContent | PhotoContent
+export type ContentData = TextContentData | PhotoContentData

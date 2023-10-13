@@ -1,4 +1,7 @@
 import React from 'react';
+import { PublisherData } from '../../data/PublisherData';
+
+import './Publisher.css';
 
 interface Props {
   publisherData:PublisherData

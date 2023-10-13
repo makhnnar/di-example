@@ -1,4 +1,4 @@
-class ActionsData {
+export class ActionsData {
 
     likes:string
     dislikes:string

@@ -1,4 +1,4 @@
-class PublisherData {
+export class PublisherData {
 
     nickname:string
     photo:string
