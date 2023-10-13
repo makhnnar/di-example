@@ -8,14 +8,9 @@ interface ContentProps {
 }
 
 export const Content = ({ contentData }: ContentProps) => {
-  console.log("is TextContentData? ",contentData instanceof TextContentData)
-  return <div>
-    {
-      contentData instanceof TextContentData? 
+  return contentData instanceof TextContentData? 
       <TextContent textContentData={(contentData as TextContentData).content}/> : 
       <PhotoContent photoContentData={(contentData as PhotoContentData).photos}/>
-    }
-  </div>
 }
 
 interface TextContentProps {
@@ -23,7 +18,7 @@ interface TextContentProps {
 }
 
 const TextContent = ({textContentData}:TextContentProps) => {
-  return <div className='post-content'>
+  return <div className='post-content no-image'>
       <p className='post-text'>{textContentData}</p>
   </div>;
 }

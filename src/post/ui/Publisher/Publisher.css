@@ -8,6 +8,7 @@
 
 .post-header {
   display: flex;
+  flex:1;
   align-items: center;
   margin-bottom: 12px;
 }

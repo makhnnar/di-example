@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import { Wall } from './wall/Wall';
+import { WallScreen } from './wall/ui/Wall';
 
 function App() {
   return (
     <div className="App">
-      <Wall/>
+      <WallScreen/>
     </div>
   );
 }

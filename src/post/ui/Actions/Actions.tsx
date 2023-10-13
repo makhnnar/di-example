@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { IconDefinition, faComment, faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import { IconDefinition, faComment, faThumbsDown, faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 import { ActionsData } from '../../data/ActionsData';
 
 import './Actions.css';

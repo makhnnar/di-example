@@ -1,20 +1,23 @@
 .post-actions {
   display: flex;
+  flex:1;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   margin: 8px;
 }
 
 .post-button {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
   flex:1;
 }
 
 .button-icon {
   background: none;
   border: none;
-  margin-right: 8px;
   cursor: pointer;
 }
 
