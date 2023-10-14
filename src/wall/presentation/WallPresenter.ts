@@ -1,3 +1,4 @@
+import {injectable,inject} from "tsyringe";
 import { PostData } from "../../post/data/PostData";
 import { IProfileRepository } from "../../profile/repository/ProfileRepository";
 import { IWallRepository } from "../repository/WallRepository";
@@ -10,14 +11,15 @@ export interface IWallPresenter {
 
 }
 
+@injectable()
 export class WallPresenter implements IWallPresenter {
 
     wallRepository: IWallRepository
     profileRepository: IProfileRepository
 
     constructor(
-        wallRepository:IWallRepository,
-        profileRepository: IProfileRepository
+        @inject("IWallRepository") wallRepository:IWallRepository,
+        @inject("IProfileRepository") profileRepository: IProfileRepository
     ){
         this.wallRepository = wallRepository
         this.profileRepository = profileRepository

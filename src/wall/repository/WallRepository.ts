@@ -1,3 +1,4 @@
+import {injectable} from "tsyringe";
 import { PhotoContentData, TextContentData } from "../../post/data/ContentData";
 import { PostData } from "../../post/data/PostData";
 
@@ -48,8 +49,9 @@ export interface IWallRepository {
 
 }
 
+@injectable()
 export class WallRepository implements IWallRepository {
-    
+
     modifyPostLikes(idPost: string, idUser: string): void {
         throw new Error("Method not implemented.");
     }

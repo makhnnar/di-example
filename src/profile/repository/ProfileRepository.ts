@@ -1,3 +1,5 @@
+import {injectable} from "tsyringe";
+
 export interface IProfileRepository {
 
     getProfile():void
@@ -6,6 +8,7 @@ export interface IProfileRepository {
 
 }
 
+@injectable()
 export class ProfileRepository implements IProfileRepository {
 
     getProfile(): void {
