@@ -1,14 +1,26 @@
+import { IProfileRepository } from "../../profile/repository/ProfileRepository"
 import { IWallPresenter, WallPresenter } from "../presentation/WallPresenter"
 import { IWallRepository, WallRepository } from "../repository/WallRepository"
 
 export class WallModule {
 
-    getWallRepository = () : IWallRepository  => {
+    profileRepository: IProfileRepository
+
+    constructor(
+        profileRepository: IProfileRepository
+    ){
+        this.profileRepository = profileRepository
+    }
+
+    providesWallRepository = () : IWallRepository  => {
         return new WallRepository()
     }
 
-    getWallPresenter = () : IWallPresenter => {
-        return new WallPresenter(this.getWallRepository())
+    providesWallPresenter = () : IWallPresenter => {
+        return new WallPresenter(
+            this.providesWallRepository(),
+            this.profileRepository
+        )
     }
 
 }

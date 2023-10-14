@@ -44,9 +44,15 @@ export interface IWallRepository {
 
     getPost():PostData[]
 
+    modifyPostLikes(idPost:string,idUser:string):void
+
 }
 
 export class WallRepository implements IWallRepository {
+    
+    modifyPostLikes(idPost: string, idUser: string): void {
+        throw new Error("Method not implemented.");
+    }
 
     getPost(): PostData[] {
         return postsData

@@ -1,22 +1,26 @@
 import React, { useContext, createContext  } from 'react';
 import { Post } from '../../post/ui/Post';
 import { WallModule } from '../di/WallModule';
+import { IWallPresenter } from '../presentation/WallPresenter';
+import { AppModule } from '../../di/AppModule';
 
-const dependencies = new WallModule()
+const dependencies = new AppModule()
 
-const WallContext = createContext(dependencies)
+const wallDependencies = dependencies.providesWallModule()
+
+const WallContext = createContext(wallDependencies)
 
 export const WallScreen = () => {
-    return <WallContext.Provider value={dependencies}>
+    return <WallContext.Provider value={wallDependencies}>
       <Wall/>
     </WallContext.Provider>
 } 
 
 export const Wall = () => {
-  const wallPresener = useContext(WallContext).getWallPresenter()
+  const wallPresenter = useContext(WallContext).providesWallPresenter()
   return <div className="wall">
     { 
-      wallPresener.getPost().map( 
+      wallPresenter.getPost().map( 
         post => { return <Post postData={post}/> } 
       ) 
     }
