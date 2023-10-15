@@ -68,8 +68,6 @@ export class WallRepository implements IWallRepository {
         if(!this.allPost){
             this.allPost = postsData
         }
-        const toShow = this.allPost.map((post) => { return post.actions })
-        console.log("all posts: ",toShow)
         return this.allPost
     }
     

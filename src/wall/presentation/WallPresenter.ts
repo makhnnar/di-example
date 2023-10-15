@@ -1,6 +1,7 @@
+import { useState, useEffect } from "react";
 import { PostData } from "../../post/data/PostData";
 import { IProfileRepository } from "../../profile/repository/ProfileRepository";
-import { IWallState } from "../state/WallState";
+import { IWallRepository } from "../repository/WallRepository";
 
 export interface IWallPresenter {
 
@@ -10,22 +11,27 @@ export interface IWallPresenter {
 
 }
 
-export const wallPresenter = (
-    wallRepository:IWallState,
+export const useWallPresenter = (
+    wallRepository:IWallRepository,
     profileRepository: IProfileRepository
 ) : IWallPresenter => {
 
-    const modifyPostLikes = (idPost: string) => {
-        console.log("clicking: presenter")
-        wallRepository.modifyPostLikes(
-            idPost,
-            profileRepository.getProfileId()
-        )
+    const [posts,setPosts] = useState<PostData[]>([])
+
+    useEffect(() => {
+        if (posts.length===0) {
+          setPosts(wallRepository.getPost())
+        }
+    }, [posts])
+
+    const modifyPostLikes = (idPost:string) => {
+        wallRepository.modifyPostLikes(idPost,profileRepository.getProfileId())
+        setPosts(wallRepository.getPost())
     }
 
     const toReturn : IWallPresenter = {
-        allPosts: wallRepository.allPosts,
-        modifyPostLikes:modifyPostLikes
+        allPosts: posts ,
+        modifyPostLikes : modifyPostLikes
     }
     return toReturn
 
