@@ -18,10 +18,10 @@ export const WallScreen = ({profileRepository}:WallScreenProps) => {
 } 
 
 export const Wall = () => {
-  const wallPresenter = useWallPresenter()
+  const { allPosts } = useWallPresenter()
   return <div className="wall">
     { 
-      wallPresenter.allPosts.map( 
+      allPosts.map( 
         post => { return <Post postData={post} key={post.idPost}/> } 
       ) 
     }

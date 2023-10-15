@@ -20,13 +20,15 @@ export const useWallPresenter = (
 
     useEffect(() => {
         if (posts.length===0) {
-          setPosts(wallRepository.getPost())
+            const newPost = wallRepository.getPost()
+            setPosts([...newPost])
         }
     }, [posts])
 
     const modifyPostLikes = (idPost:string) => {
         wallRepository.modifyPostLikes(idPost,profileRepository.getProfileId())
-        setPosts(wallRepository.getPost())
+        const newPost = wallRepository.getPost()
+        setPosts([...newPost])
     }
 
     const toReturn : IWallPresenter = {
