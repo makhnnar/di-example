@@ -4,22 +4,22 @@ import { IWallRepository, WallRepository } from "../repository/WallRepository"
 
 export class WallModule {
 
-    profileRepository: IProfileRepository
+    private profileRepository?: IProfileRepository
 
     constructor(
-        profileRepository: IProfileRepository
+        profileRepository?: IProfileRepository
     ){
         this.profileRepository = profileRepository
     }
 
-    providesWallRepository = () : IWallRepository  => {
+    private providesWallRepository = () : IWallRepository  => {
         return new WallRepository()
     }
 
     providesWallPresenter = () : IWallPresenter => {
         return new WallPresenter(
             this.providesWallRepository(),
-            this.profileRepository
+            this.profileRepository!
         )
     }
 

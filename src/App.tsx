@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 import './App.css';
 import { WallScreen } from './wall/ui/Wall';
+import { AppModule } from './di/AppModule';
 
-function App() {
+const dependencies = new AppModule()
+
+const AppContext = createContext(dependencies)
+
+export const App = () => {
+    return <AppContext.Provider value={dependencies}>
+      <AppScreen/>
+    </AppContext.Provider>
+} 
+
+
+function AppScreen() {
+  const profileRepository = useContext(AppContext).providesProfileRepository()
   return (
     <div className="App">
-      <WallScreen/>
+      <WallScreen profileRepository={profileRepository}/>
     </div>
   );
 }

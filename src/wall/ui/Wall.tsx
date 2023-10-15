@@ -2,22 +2,23 @@ import React, { useContext, createContext  } from 'react';
 import { Post } from '../../post/ui/Post';
 import { WallModule } from '../di/WallModule';
 import { IWallPresenter } from '../presentation/WallPresenter';
-import { AppModule } from '../../di/AppModule';
+import { IProfileRepository } from '../../profile/repository/ProfileRepository';
 
-const dependencies = new AppModule()
+const WallContext = createContext(new WallModule())
 
-const wallDependencies = dependencies.providesWallModule()
+interface WallScreenProps {
+  profileRepository: IProfileRepository
+}
 
-const WallContext = createContext(wallDependencies)
-
-export const WallScreen = () => {
-    return <WallContext.Provider value={wallDependencies}>
+export const WallScreen = ({profileRepository}:WallScreenProps) => {
+    const dependencies = new WallModule(profileRepository)
+    return <WallContext.Provider value={dependencies}>
       <Wall/>
     </WallContext.Provider>
 } 
 
 export const Wall = () => {
-  const wallPresenter = useContext(WallContext).providesWallPresenter()
+  const wallPresenter = useWallPresenter()
   return <div className="wall">
     { 
       wallPresenter.getPost().map( 
@@ -25,4 +26,8 @@ export const Wall = () => {
       ) 
     }
   </div>
+}
+
+export const useWallPresenter = (): IWallPresenter => {
+    return useContext(WallContext).providesWallPresenter()
 }

@@ -1,16 +1,14 @@
-import { ProfileModule } from "../profile/di/ProfileModule"
-import { WallModule } from "../wall/di/WallModule"
+import { IProfileRepository, ProfileRepository } from "../profile/repository/ProfileRepository"
 
 export class AppModule {
 
-    providesProfileModule = () : ProfileModule  => {
-        return new ProfileModule()
-    }
+    private _profileRepository?: IProfileRepository
 
-    providesWallModule = () : WallModule => {
-        return new WallModule(
-            this.providesProfileModule().getProfileRepository()
-        )
+    providesProfileRepository = () : IProfileRepository  => {
+        if(!this._profileRepository){
+            this._profileRepository = new ProfileRepository()
+        }
+        return this._profileRepository
     }
 
 }

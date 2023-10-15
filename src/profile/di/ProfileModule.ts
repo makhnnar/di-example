@@ -1,9 +1,17 @@
-import { IProfileRepository, ProfileRepository } from "../repository/ProfileRepository"
+import { IProfileRepository } from "../repository/ProfileRepository"
 
 export class ProfileModule {
 
+    profileRepository: IProfileRepository
+
+    constructor(
+        profileRepository: IProfileRepository
+    ){
+        this.profileRepository = profileRepository
+    }
+
     getProfileRepository = () : IProfileRepository  => {
-        return new ProfileRepository()
+        return this.profileRepository
     }
 
 }
