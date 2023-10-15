@@ -14,7 +14,7 @@ export const Post = ({postData}:Props) => {
     <div className="post">
         <Publisher publisherData={postData.publisher}/>
         <Content contentData={postData.content}/>
-        <Actions actionsData={postData.actions}/>
+        <Actions actionsData={postData.actions} idPost={postData.idPost}/>
     </div>
   );
 }

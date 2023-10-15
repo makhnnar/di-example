@@ -1,34 +1,32 @@
 import { PostData } from "../../post/data/PostData";
 import { IProfileRepository } from "../../profile/repository/ProfileRepository";
-import { IWallRepository } from "../repository/WallRepository";
+import { IWallState } from "../state/WallState";
 
 export interface IWallPresenter {
 
-    getPost():PostData[]
+    allPosts:PostData[]
 
     modifyPostLikes(idPost:string):void
 
 }
 
-export class WallPresenter implements IWallPresenter {
-
-    wallRepository: IWallRepository
+export const wallPresenter = (
+    wallRepository:IWallState,
     profileRepository: IProfileRepository
+) : IWallPresenter => {
 
-    constructor(
-        wallRepository:IWallRepository,
-        profileRepository: IProfileRepository
-    ){
-        this.wallRepository = wallRepository
-        this.profileRepository = profileRepository
+    const modifyPostLikes = (idPost: string) => {
+        console.log("clicking: presenter")
+        wallRepository.modifyPostLikes(
+            idPost,
+            profileRepository.getProfileId()
+        )
     }
 
-    modifyPostLikes(idPost: string): void {
-        throw new Error("Method not implemented.");
+    const toReturn : IWallPresenter = {
+        allPosts: wallRepository.allPosts,
+        modifyPostLikes:modifyPostLikes
     }
-
-    getPost(): PostData[] {
-        return this.wallRepository.getPost()
-    }
+    return toReturn
 
 }

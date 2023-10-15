@@ -1,6 +1,7 @@
 import { IProfileRepository } from "../../profile/repository/ProfileRepository"
-import { IWallPresenter, WallPresenter } from "../presentation/WallPresenter"
+import { IWallPresenter, wallPresenter } from "../presentation/WallPresenter"
 import { IWallRepository, WallRepository } from "../repository/WallRepository"
+import { IWallState, useWallState } from "../state/WallState"
 
 export class WallModule {
 
@@ -16,9 +17,13 @@ export class WallModule {
         return new WallRepository()
     }
 
+    private providesWallState = () :IWallState => {
+        return useWallState(this.providesWallRepository())
+    }
+
     providesWallPresenter = () : IWallPresenter => {
-        return new WallPresenter(
-            this.providesWallRepository(),
+        return wallPresenter(
+            this.providesWallState(),
             this.profileRepository!
         )
     }

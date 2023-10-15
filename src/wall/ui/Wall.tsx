@@ -21,8 +21,8 @@ export const Wall = () => {
   const wallPresenter = useWallPresenter()
   return <div className="wall">
     { 
-      wallPresenter.getPost().map( 
-        post => { return <Post postData={post}/> } 
+      wallPresenter.allPosts.map( 
+        post => { return <Post postData={post} key={post.idPost}/> } 
       ) 
     }
   </div>

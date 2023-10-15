@@ -1,3 +1,5 @@
+const idProfile = "idProfile" 
+
 export interface IProfileRepository {
 
     getProfile():void
@@ -13,7 +15,7 @@ export class ProfileRepository implements IProfileRepository {
     }
     
     getProfileId(): string {
-        throw new Error("Method not implemented.")
+        return idProfile
     }
     
 }
