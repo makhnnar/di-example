@@ -1,8 +1,10 @@
+import { ProfileData } from "../data/ProfileData"
+
 const idProfile = "idProfile" 
 
 export interface IProfileRepository {
 
-    getProfile():void
+    getProfile():ProfileData
 
     getProfileId():string
 
@@ -10,8 +12,13 @@ export interface IProfileRepository {
 
 export class ProfileRepository implements IProfileRepository {
 
-    getProfile(): void {
-        throw new Error("Method not implemented.")
+    getProfile(): ProfileData {
+        return new ProfileData(
+            idProfile,
+           "someName",
+           "someBio",
+           "somePhoto" 
+        )
     }
     
     getProfileId(): string {

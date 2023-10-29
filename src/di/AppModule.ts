@@ -1,14 +1,45 @@
-import { IProfileRepository, ProfileRepository } from "../profile/repository/ProfileRepository"
+import { IProfileDataModule, IProfileModule, ProfileDataModule, ProfileModule } from "../profile/di/ProfileModule"
+import { IWallDataModule, IWallModule, WallDataModule, WallModule } from "../wall/di/WallModule"
 
-export class AppModule {
+export interface IAppModule {
 
-    private _profileRepository?: IProfileRepository
+    providesWallDomainModule : () => IWallModule
+    providesProfileDomainModule : () => IProfileModule
 
-    providesProfileRepository = () : IProfileRepository  => {
-        if(!this._profileRepository){
-            this._profileRepository = new ProfileRepository()
-        }
-        return this._profileRepository
+}
+
+//necessary empty module for context creation
+export const voidAppModule : IAppModule = {
+    providesWallDomainModule: function (): IWallModule {
+        throw new Error("Function not implemented.")
+    },
+    providesProfileDomainModule: function (): IProfileModule {
+        throw new Error("Function not implemented.")
+    }
+}
+
+export class AppModule implements IAppModule {
+
+    providesWallDataModule = () : IWallDataModule => {
+        return new WallDataModule()
     }
 
+    providesWallDomainModule = () : IWallModule => {
+        return new WallModule({
+            providesWallRepository: this.providesWallDataModule().providesWallRepository,
+            providesProfileRepository: this.providesProfileDataModule().providesProfileRepository
+        })
+    }
+
+    providesProfileDataModule = () : IProfileDataModule => {
+        return new ProfileDataModule()
+    }
+
+    providesProfileDomainModule = () : IProfileModule => {
+        return new ProfileModule({
+            providesWallRepository: this.providesWallDataModule().providesWallRepository,
+            providesProfileRepository: this.providesProfileDataModule().providesProfileRepository
+        })
+    }
+    
 }

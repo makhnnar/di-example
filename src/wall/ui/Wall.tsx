@@ -1,17 +1,16 @@
 import React, { useContext, createContext  } from 'react';
 import { Post } from '../../post/ui/Post';
-import { WallModule } from '../di/WallModule';
 import { IWallPresenter } from '../presentation/WallPresenter';
-import { IProfileRepository } from '../../profile/repository/ProfileRepository';
+import { IWallModule, voidWallModule } from '../di/WallModule';
 
-const WallContext = createContext(new WallModule())
+const WallContext = createContext(voidWallModule)
 
 interface WallScreenProps {
-  profileRepository: IProfileRepository
+  wallModule: IWallModule
 }
 
-export const WallScreen = ({profileRepository}:WallScreenProps) => {
-    const dependencies = new WallModule(profileRepository)
+export const WallScreen = ({wallModule}:WallScreenProps) => {
+    const dependencies = wallModule
     return <WallContext.Provider value={dependencies}>
       <Wall/>
     </WallContext.Provider>
