@@ -1,0 +1,25 @@
+.tab-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Set the height to 100% of the viewport height */
+  }
+  
+  .tab {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Distribute available space vertically */
+    justify-content: space-evenly; /* Distribute child buttons equally along the vertical axis */
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .inactive {
+    color: #000;
+  }
+  
+  .active {
+    color: #2e2e2e;
+    background-color: #e2e2e2;
+  }
+  
