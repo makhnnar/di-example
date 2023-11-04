@@ -31,7 +31,7 @@ export const useProfilePresenter = (
     useEffect(() => {
         const profile = profileRepository.getProfile()
         setProfile({...profile})
-    }, [profile])
+    }, [])
 
     return {
         allPosts: posts,

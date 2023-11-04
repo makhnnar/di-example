@@ -1,9 +1,9 @@
 /* Profile container */
 .profile {
-    max-width: 600px;
+    max-width: 70%;
     margin: 0 auto;
     padding: 20px;
-  }
+}
   
   /* Profile header */
   .profile-header {
@@ -32,14 +32,6 @@
   
   /* Profile posts */
   .profile-posts {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
-  
-  .post {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+    margin-top: 30px;
   }
   

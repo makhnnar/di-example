@@ -1,29 +1,32 @@
-/* Image grid container */
+/* Image grid container 
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+*/
 .posts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     margin: 16px;
-  }
+}
   
   /* Individual image item */
-  .post-item {
-    position: relative;
-    overflow: hidden;
+.post-item {
+    display: flex;
     border-radius: 8px;
-  }
-  
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+}
+
   /* Image style */
-  .post-item img {
-    display: block;
+.post-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s;
-  }
+}
   
   /* Hover effect */
-  .post-item:hover img {
+.post-item:hover img {
     transform: scale(1.05);
-  }
+}
   

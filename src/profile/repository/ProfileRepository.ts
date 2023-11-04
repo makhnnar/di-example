@@ -17,7 +17,7 @@ export class ProfileRepository implements IProfileRepository {
             idProfile,
            "someName",
            "someBio",
-           "somePhoto" 
+           "/img/image6.jpeg" 
         )
     }
     

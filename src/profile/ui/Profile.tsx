@@ -4,6 +4,8 @@ import ProfileHeader from "./profileHeader/ProfileHeader";
 import { IProfileModule, voidProfileModule } from "../di/ProfileModule";
 import { IProfilePresenter } from "../presentation/ProfilePresenter";
 
+import "./Profile.css";
+
 const ProfileContext = createContext(voidProfileModule)
 
 interface ProfileScreenProps {
