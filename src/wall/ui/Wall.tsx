@@ -1,19 +1,12 @@
-import React, { useContext, createContext  } from 'react';
+import React from 'react';
 import { Post } from '../../post/ui/Post';
 import { IWallPresenter } from '../presentation/WallPresenter';
-import { IWallModule, voidWallModule } from '../di/WallModule';
+import { runWallDI, wallContainer } from '../di/WallModule';
 
-const WallContext = createContext(voidWallModule)
+runWallDI()
 
-interface WallScreenProps {
-  wallModule: IWallModule
-}
-
-export const WallScreen = ({wallModule}:WallScreenProps) => {
-    const dependencies = wallModule
-    return <WallContext.Provider value={dependencies}>
-      <Wall/>
-    </WallContext.Provider>
+export const WallScreen = () => {
+    return <Wall/>
 } 
 
 export const Wall = () => {
@@ -28,5 +21,7 @@ export const Wall = () => {
 }
 
 export const useWallPresenter = (): IWallPresenter => {
-    return useContext(WallContext).providesWallPresenter()
+    const wallPresenter = wallContainer.resolve('wallPresenter');
+    console.log("wallPresenter",JSON.stringify(wallPresenter))
+    return wallPresenter
 }

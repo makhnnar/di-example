@@ -1,26 +1,19 @@
-import React, { createContext, useContext } from "react";
+import React from "react";
 import PostsGrid from "../../post/ui/PostsGrid/PostsGrid";
 import ProfileHeader from "./profileHeader/ProfileHeader";
-import { IProfileModule, voidProfileModule } from "../di/ProfileModule";
 import { IProfilePresenter } from "../presentation/ProfilePresenter";
 
 import "./Profile.css";
+import { runProfileDI,profileContainer } from "../di/ProfileModule";
 
-const ProfileContext = createContext(voidProfileModule)
+runProfileDI()
 
-interface ProfileScreenProps {
-    profileModule: IProfileModule
-  }
-
-export const ProfileScreen = ({profileModule}:ProfileScreenProps) => {
-    const dependencies = profileModule
-    return <ProfileContext.Provider value={dependencies}>
-      <Profile/>
-    </ProfileContext.Provider>
+export const ProfileScreen = () => {
+    return <Profile/>
 } 
 
 const Profile = () => {
-    const { allPosts,userProfile } = useProfilePresenter()
+  const { allPosts,userProfile } = useProfilePresenter()
   return (
     <div className="profile">
       <ProfileHeader profile={userProfile}/>
@@ -34,5 +27,7 @@ const Profile = () => {
 export default Profile;
 
 export const useProfilePresenter = (): IProfilePresenter => {
-    return useContext(ProfileContext).providesProfilePresenter()
+    const profilePresenter = profileContainer.resolve('profilePresenter');
+    console.log("profilePresenter",JSON.stringify(profilePresenter))
+    return profilePresenter
 }

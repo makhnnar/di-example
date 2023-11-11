@@ -1,45 +1,27 @@
-import { IProfileDataModule, IProfileModule, ProfileDataModule, ProfileModule } from "../profile/di/ProfileModule"
-import { IWallDataModule, IWallModule, WallDataModule, WallModule } from "../wall/di/WallModule"
+import { useProfilePresenter } from "../profile/presentation/ProfilePresenter";
+import { ProfileRepository } from "../profile/repository/ProfileRepository";
 
-export interface IAppModule {
+import { createContainer, asClass, asFunction } from 'awilix';
+import { useWallPresenter } from "../wall/presentation/WallPresenter";
+import { WallRepository } from "../wall/repository/WallRepository";
 
-    providesWallDomainModule : () => IWallModule
-    providesProfileDomainModule : () => IProfileModule
+// Create a container
+const diContainer = createContainer();
 
-}
+export const runDI = () => {
+  
+    // Register the repositories
+  diContainer.register({
+    wallRepository: asClass(WallRepository).singleton(),
+    profileRepository: asClass(ProfileRepository).singleton(),
+  });
+  
+  // Register the presenters
+  diContainer.register({
+    wallPresenter: asFunction(useWallPresenter).classic(),
+    profilePresenter: asFunction(useProfilePresenter).classic(),
+  });
 
-//necessary empty module for context creation
-export const voidAppModule : IAppModule = {
-    providesWallDomainModule: function (): IWallModule {
-        throw new Error("Function not implemented.")
-    },
-    providesProfileDomainModule: function (): IProfileModule {
-        throw new Error("Function not implemented.")
-    }
-}
+  return diContainer
 
-export class AppModule implements IAppModule {
-
-    providesWallDataModule = () : IWallDataModule => {
-        return new WallDataModule()
-    }
-
-    providesWallDomainModule = () : IWallModule => {
-        return new WallModule({
-            providesWallRepository: this.providesWallDataModule().providesWallRepository,
-            providesProfileRepository: this.providesProfileDataModule().providesProfileRepository
-        })
-    }
-
-    providesProfileDataModule = () : IProfileDataModule => {
-        return new ProfileDataModule()
-    }
-
-    providesProfileDomainModule = () : IProfileModule => {
-        return new ProfileModule({
-            providesWallRepository: this.providesWallDataModule().providesWallRepository,
-            providesProfileRepository: this.providesProfileDataModule().providesProfileRepository
-        })
-    }
-    
 }
