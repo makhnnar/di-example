@@ -1,0 +1,36 @@
+.comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .comment-name {
+    font-weight: bold;
+  }
+
+  .comment-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .like-button, .dislike-button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .dislike-button {
+    background-color: #FF5733;
+  }
