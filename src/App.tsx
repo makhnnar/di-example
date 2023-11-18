@@ -5,6 +5,7 @@ import { AppModule, IAppModule } from './di/AppModule';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { ProfileScreen } from './profile/ui/Profile';
 import { NavBar } from './navbar/NavBar';
+import { testContainer } from './di/DependencyHelper';
 
 const dependencies = new AppModule()
 
@@ -24,6 +25,7 @@ const tabs = [
 ]
 
 export const App = () => {
+    testContainer()
     return <BrowserRouter>
       <AppContext.Provider value={dependencies}>
         <AppScreen/>

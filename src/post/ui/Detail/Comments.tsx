@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
+import { CommentData } from '../../data/CommentData';
 
-const CommentList = () => {
+interface Props {
+  comments: CommentData[]
+}
+
+
+const CommentList = ({comments}:Props) => {
     const handleLike = (id:string) => {
         
     };
@@ -11,21 +17,21 @@ const CommentList = () => {
     
     return (
       <div>
-        {this.state.comments.map((comment) => (
-          <div key={comment.id} className="comment">
-            <div className="comment-name">{comment.publisher}</div>
+        {comments.map((comment) => (
+          <div key={comment.idComment} className="comment">
+            <div className="comment-name">{comment.publisher.nickname}</div>
             <div className="comment-actions">
               <button
                 className="like-button"
-                onClick={() => this.handleLike(comment.id)}
+                onClick={() => handleLike(comment.idComment)}
               >
-                Like ({comment.likes})
+                Like ({comment.actions.likes})
               </button>
               <button
                 className="dislike-button"
-                onClick={() => this.handleDislike(comment.id)}
+                onClick={() => handleDislike(comment.idComment)}
               >
-                Dislike ({comment.dislikes})
+                Dislike ({comment.actions.dislikes})
               </button>
             </div>
           </div>
