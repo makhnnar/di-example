@@ -16,7 +16,7 @@ export const runProfileDI = () => {
   
     // Register the presenters
     profileContainer.register({
-        profilePresenter: asFunction(useProfilePresenter).classic(),
+        profilePresenter: asFunction(useProfilePresenter),
     });
 
 }

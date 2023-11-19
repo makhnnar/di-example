@@ -12,9 +12,13 @@ export interface IProfilePresenter {
 
 }
 
-export const useProfilePresenter = (
-    wallRepository:IWallRepository,
+interface ProfilePresenterParams {
+    wallRepository:IWallRepository
     profileRepository: IProfileRepository
+}
+
+export const useProfilePresenter = (
+    {wallRepository,profileRepository}:ProfilePresenterParams
 ) : IProfilePresenter => {
 
     const [posts,setPosts] = useState<PostData[]>([])

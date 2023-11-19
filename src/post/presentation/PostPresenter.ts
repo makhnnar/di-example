@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { PostData } from "../../post/data/PostData";
-import { IProfileRepository } from "../../profile/repository/ProfileRepository";
-import { IWallRepository } from "../repository/WallRepository";
+import { useState, useEffect } from "react"
+import { IProfileRepository } from "../../profile/repository/ProfileRepository"
+import { IWallRepository } from "../../wall/repository/WallRepository"
+import { PostData } from "../data/PostData"
 
-export interface IWallPresenter {
+export interface IPostPresenter {
 
     allPosts:PostData[]
 
@@ -11,14 +11,14 @@ export interface IWallPresenter {
 
 }
 
-interface WallPresenterParams {
+interface PostPresenterParams {
     wallRepository:IWallRepository
     profileRepository: IProfileRepository
 }
 
-export const useWallPresenter = (
-    {wallRepository,profileRepository} : WallPresenterParams
-) : IWallPresenter => {
+export const usePostPresenter = (
+    {wallRepository,profileRepository} : PostPresenterParams
+) : IPostPresenter => {
 
     const [posts,setPosts] = useState<PostData[]>([])
 
@@ -35,7 +35,7 @@ export const useWallPresenter = (
         setPosts([...newPost])
     }
 
-    const toReturn : IWallPresenter = {
+    const toReturn : IPostPresenter = {
         allPosts: posts ,
         modifyPostLikes : modifyPostLikes
     }

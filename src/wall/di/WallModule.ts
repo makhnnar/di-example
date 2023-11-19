@@ -16,7 +16,7 @@ export const runWallDI = () => {
   
     // Register the presenters
     wallContainer.register({
-        wallPresenter: asFunction(useWallPresenter).classic(),
+        wallPresenter: asFunction(useWallPresenter),
     });
 
 }
