@@ -10,6 +10,8 @@ export interface IProfilePresenter {
 
     userProfile: ProfileData
 
+    resolvePostDetail: (id:string) => PostData
+
 }
 
 interface ProfilePresenterParams {
@@ -37,9 +39,16 @@ export const useProfilePresenter = (
         setProfile({...profile})
     }, [])
 
+    const resolvePostDetail = (id:string) : PostData => {
+        console.log("id post",id)
+        console.log("allPost => reolver",posts)
+        return posts.filter(post => post.idPost == id)[0]
+    }
+
     return {
         allPosts: posts,
-        userProfile: profile
+        userProfile: profile,
+        resolvePostDetail:resolvePostDetail
     }
 
 }

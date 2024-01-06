@@ -13,7 +13,7 @@ export const Post = ({postData}:Props) => {
   return (
     <div className="post">
         <Publisher publisherData={postData.publisher}/>
-        <Content contentData={postData.content}/>
+        <Content contentData={postData.content} onPostClick={()=>{}}/>
         <Actions actionsData={postData.actions} idPost={postData.idPost}/>
     </div>
   );

@@ -18,8 +18,8 @@ export const runDI = () => {
   
   // Register the presenters
   diContainer.register({
-    wallPresenter: asFunction(useWallPresenter).classic(),
-    profilePresenter: asFunction(useProfilePresenter).classic(),
+    wallPresenter: asFunction(useWallPresenter),
+    profilePresenter: asFunction(useProfilePresenter),
   });
 
   return diContainer

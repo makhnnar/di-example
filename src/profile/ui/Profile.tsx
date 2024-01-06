@@ -4,9 +4,10 @@ import ProfileHeader from "./profileHeader/ProfileHeader";
 import { IProfilePresenter } from "../presentation/ProfilePresenter";
 
 import "./Profile.css";
-import { runProfileDI,profileContainer } from "../di/ProfileModule";
+import { runProfileDI } from "../di/ProfileModule";
 
-runProfileDI()
+
+const profileContainer = runProfileDI()
 
 export const ProfileScreen = () => {
     return <Profile/>

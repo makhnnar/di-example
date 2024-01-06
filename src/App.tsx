@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
 import { WallScreen } from './wall/ui/Wall';
-import { runDI } from './di/AppModule';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { ProfileScreen } from './profile/ui/Profile';
 import { NavBar } from './navbar/NavBar';
+import { PostDetailScreen } from './post/ui/Detail/PostDetail';
 
 
 const tabs = [
@@ -33,6 +33,7 @@ function AppScreen() {
       <Routes>
         <Route path='/' element={<WallScreen/>}/>
         <Route path='profile' element={<ProfileScreen/>}/>
+        <Route path='profile/post/:id' element={<PostDetailScreen/>}/>
       </Routes>
     </div>
   );

@@ -1,22 +1,19 @@
-import { createContainer, asClass, asFunction } from 'awilix';
+import { createContainer, asClass, asFunction, Lifetime } from 'awilix';
 import { WallRepository } from '../../wall/repository/WallRepository';
 import { useProfilePresenter } from '../presentation/ProfilePresenter';
 import { ProfileRepository } from '../repository/ProfileRepository';
 
 // Create a container
-export const profileContainer = createContainer();
-
 export const runProfileDI = () => {
+
+    let profileContainer = createContainer();
   
     // Register the repositories
     profileContainer.register({
-        wallRepository: asClass(WallRepository).singleton(),
-        profileRepository: asClass(ProfileRepository).singleton(),
+        wallRepository: asClass(WallRepository),
+        profileRepository: asClass(ProfileRepository),
+        profilePresenter: asFunction(useProfilePresenter)
     });
   
-    // Register the presenters
-    profileContainer.register({
-        profilePresenter: asFunction(useProfilePresenter),
-    });
-
+    return profileContainer
 }
